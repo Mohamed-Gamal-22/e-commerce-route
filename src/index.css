@@ -29,6 +29,19 @@ a:hover {
   border: solid 0px var(--main-color);
 }
 
+.network {
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+
+  background-color: rgb(241, 117, 117);
+  color: #333;
+  text-transform: capitalize;
+  box-shadow: var(--shadow);
+  padding: 20px;
+  font-weight: bold;
+}
+
 .product:hover {
   box-shadow: var(--shadow);
   border: solid 1px var(--main-color);

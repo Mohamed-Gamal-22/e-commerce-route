@@ -5,32 +5,46 @@ import axios from "axios";
 import { Oval } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../Context/CartContext";
-import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+
+// import Swal from "sweetalert2";
 
 export default function Products() {
   const { AddToCart } = useContext(CartContext);
 
   async function addProduct(productid) {
     let res = await AddToCart(productid);
-    console.log(res.data.status);
+    console.log(res);
 
-    if (res.data.status == "success") {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: res.data.message,
-        showConfirmButton: false,
-        timer: 2000,
+    if (res.data.status === "success") {
+      toast.success("Product Add Successfully", {
+        duration: 4000,
+        icon: "😍",
       });
     } else {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: res.data.message,
-        showConfirmButton: false,
-        timer: 1000,
+      toast.error("Error While Adding Product", {
+        duration: 4000,
+        icon: "💔😞",
       });
     }
+
+    // if (res.data.status === "success") {
+    //   Swal.fire({
+    //     position: "center",
+    //     icon: "success",
+    //     title: res.data.message,
+    //     showConfirmButton: false,
+    //     timer: 2000,
+    //   });
+    // } else {
+    //   Swal.fire({
+    //     position: "center",
+    //     icon: "error",
+    //     title: res.data.message,
+    //     showConfirmButton: false,
+    //     timer: 1000,
+    //   });
+    // }
   }
 
   function getAllProducts() {

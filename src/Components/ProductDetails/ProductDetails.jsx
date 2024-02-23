@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ProductDetails.module.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useQuery } from "react-query";
+import { Helmet } from "react-helmet";
 //https://ecommerce.routemisr.com/api/v1/products/6428de2adc1175abc65ca05b
+
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -12,7 +14,7 @@ export default function ProductDetails() {
     return axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`);
   }
 
-  const { data, isLoading } = useQuery("getProduct", () => getProduct(id));
+  const { data } = useQuery("getProduct", () => getProduct(id));
 
   // console.log(data?.data.data);
 
@@ -20,6 +22,9 @@ export default function ProductDetails() {
     <>
       {data?.data.data ? (
         <div className="container">
+          <Helmet>
+            <title>{data?.data.data.title}</title>
+          </Helmet>
           <div className="row align-items-center">
             <div className="col-md-4">
               <div className="img">
